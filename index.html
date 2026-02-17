@@ -102,15 +102,29 @@
             transition: transform 0.6s;
             cursor: pointer;
             border: 1px solid rgba(255,255,255,0.2);
+            overflow: hidden;
         }
 
         .photo-card:hover {
             transform: rotateY(10deg) rotateX(5deg) scale(1.05);
         }
 
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
         .photo-placeholder {
             width: 100%;
-            height: 200px;
+            height: 250px;
             background: linear-gradient(45deg, #ff6b6b, #feca57);
             border-radius: 15px;
             display: flex;
@@ -213,6 +227,133 @@
             margin-bottom: 15px;
         }
 
+        /* Music Player Section */
+        .music-section {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 30px;
+            margin: 40px 0;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .music-player {
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .album-art {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #ff6b6b);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+            animation: spin 10s linear infinite;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .album-art.paused {
+            animation-play-state: paused;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .play-btn {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border: none;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .song-info h3 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            color: #ffd700;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #ff6b6b, #ffd700);
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .visualizer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 60px;
+            gap: 5px;
+            margin: 20px 0;
+        }
+
+        .bar {
+            width: 8px;
+            background: linear-gradient(to top, #ff6b6b, #ffd700);
+            border-radius: 5px;
+            animation: dance 1s infinite ease-in-out;
+        }
+
+        .bar:nth-child(1) { height: 20px; animation-delay: 0s; }
+        .bar:nth-child(2) { height: 40px; animation-delay: 0.1s; }
+        .bar:nth-child(3) { height: 30px; animation-delay: 0.2s; }
+        .bar:nth-child(4) { height: 50px; animation-delay: 0.3s; }
+        .bar:nth-child(5) { height: 35px; animation-delay: 0.4s; }
+        .bar:nth-child(6) { height: 45px; animation-delay: 0.5s; }
+        .bar:nth-child(7) { height: 25px; animation-delay: 0.6s; }
+        .bar:nth-child(8) { height: 40px; animation-delay: 0.7s; }
+
+        .visualizer.paused .bar {
+            animation-play-state: paused;
+            height: 5px !important;
+            transition: height 0.3s;
+        }
+
+        @keyframes dance {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+
         /* Interactive Button */
         .surprise-btn {
             display: block;
@@ -233,22 +374,6 @@
         .surprise-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        }
-
-        .surprise-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255,255,255,0.2);
-            transform: rotate(30deg);
-            transition: all 0.6s;
-        }
-
-        .surprise-btn:hover::after {
-            transform: rotate(30deg) translate(20%, 20%);
         }
 
         /* Hidden Message */
@@ -272,45 +397,6 @@
             margin-bottom: 20px;
         }
 
-        /* Music Visualizer Simulation */
-        .music-section {
-            text-align: center;
-            padding: 40px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 30px;
-            margin: 40px 0;
-        }
-
-        .visualizer {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            height: 100px;
-            gap: 5px;
-            margin: 20px 0;
-        }
-
-        .bar {
-            width: 10px;
-            background: linear-gradient(to top, #ff6b6b, #ffd700);
-            border-radius: 5px;
-            animation: dance 1s infinite ease-in-out;
-        }
-
-        .bar:nth-child(1) { height: 40px; animation-delay: 0s; }
-        .bar:nth-child(2) { height: 70px; animation-delay: 0.1s; }
-        .bar:nth-child(3) { height: 50px; animation-delay: 0.2s; }
-        .bar:nth-child(4) { height: 80px; animation-delay: 0.3s; }
-        .bar:nth-child(5) { height: 60px; animation-delay: 0.4s; }
-        .bar:nth-child(6) { height: 90px; animation-delay: 0.5s; }
-        .bar:nth-child(7) { height: 55px; animation-delay: 0.6s; }
-        .bar:nth-child(8) { height: 75px; animation-delay: 0.7s; }
-
-        @keyframes dance {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.3); }
-        }
-
         /* Footer */
         footer {
             text-align: center;
@@ -323,6 +409,37 @@
             font-size: 2em;
             margin-top: 20px;
             color: #ffd700;
+        }
+
+        /* Instructions Box */
+        .instructions {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .instructions h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .instructions code {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #ff6b6b;
+        }
+
+        .file-list {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-family: monospace;
         }
 
         /* Animations */
@@ -348,6 +465,7 @@
             .timeline::before { left: 20px; }
             .timeline-item { width: 100%; left: 0 !important; padding-left: 60px; text-align: left !important; }
             .love-letter { padding: 30px 20px; }
+            .album-art { width: 150px; height: 150px; }
         }
 
         /* Custom Scrollbar */
@@ -377,22 +495,56 @@
             <p class="subtitle">Every moment with you is a treasure 💕</p>
         </header>
 
+        <!-- Setup Instructions (Delete this section after setup) -->
+        <section class="instructions">
+            <h3>📁 Setup Instructions (Remove this box after setup)</h3>
+            <p><strong>Create a folder with these exact file names:</strong></p>
+            <div class="file-list">
+                📂 anniversary-website/<br>
+                ├── anniversary.html (this file)<br>
+                ├── <code>photo1.jpg</code> - Your first date photo<br>
+                ├── <code>photo2.jpg</code> - Adventure/travel photo<br>
+                ├── <code>photo3.jpg</code> - Cute couple selfie<br>
+                ├── <code>photo4.jpg</code> - Special moment photo<br>
+                ├── <code>photo5.jpg</code> - Recent photo together<br>
+                ├── <code>photo6.jpg</code> - Favorite memory photo<br>
+                ├── <code>album-art.jpg</code> - Song album cover (optional)<br>
+                └── <code>our-song.mp3</code> - Your special song
+            </div>
+            <p><em>Delete this entire "instructions" section after adding your files!</em></p>
+        </section>
+
         <!-- Photo Gallery -->
         <section class="gallery">
             <div class="photo-card" onclick="this.style.transform='rotate(360deg)'">
-                <div class="photo-placeholder">📸</div>
+                <img src="photo1.jpeg" alt="Our First Date" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\'>📸<br><small>Add photo1.jpg</small></div><h3>Our First Date</h3><p>The beginning of forever</p>'">
                 <h3>Our First Date</h3>
                 <p>The beginning of forever</p>
             </div>
             <div class="photo-card" onclick="this.style.transform='rotate(360deg)'">
-                <div class="photo-placeholder" style="background: linear-gradient(45deg, #a8edea, #fed6e3);">🌟</div>
+                <img src="photo2.jpeg" alt="Adventures" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\' style=\'background: linear-gradient(45deg, #a8edea, #fed6e3);\'>🌟<br><small>Add photo2.jpg</small></div><h3>Adventures Together</h3><p>Exploring the world hand in hand</p>'">
                 <h3>Adventures Together</h3>
                 <p>Exploring the world hand in hand</p>
             </div>
             <div class="photo-card" onclick="this.style.transform='rotate(360deg)'">
-                <div class="photo-placeholder" style="background: linear-gradient(45deg, #ff9a9e, #fecfef);">💑</div>
+                <img src="photo3.jpeg" alt="Us" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\' style=\'background: linear-gradient(45deg, #ff9a9e, #fecfef);\'>💑<br><small>Add photo3.jpg</small></div><h3>Everyday Moments</h3><p>Finding magic in the ordinary</p>'">
                 <h3>Everyday Moments</h3>
                 <p>Finding magic in the ordinary</p>
+            </div>
+            <div class="photo-card" onclick="this.style.transform='rotate(360deg)'">
+                <img src="photo4.jpeg" alt="Special Memory" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\' style=\'background: linear-gradient(45deg, #ffd1ff, #fad0c4);\'>💕<br><small>Add photo4.jpg</small></div><h3>Special Memory</h3><p>A moment to remember forever</p>'">
+                <h3>Special Memory</h3>
+                <p>A moment to remember forever</p>
+            </div>
+            <div class="photo-card" onclick="this.style.transform='rotate(360deg)'">
+                <img src="photo5.jpeg" alt="Recent" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\' style=\'background: linear-gradient(45deg, #a18cd1, #fbc2eb);\'>📅<br><small>Add photo5.jpg</small></div><h3>Recently</h3><p>Still falling for you every day</p>'">
+                <h3>Recently</h3>
+                <p>Still falling for you every day</p>
+            </div>
+            <div class="photo-card" onclick="this.style.transform='rotate(360deg)'">
+                <img src="photo6.jpeg" alt="Favorite" onerror="this.parentElement.innerHTML='<div class=\'photo-placeholder\' style=\'background: linear-gradient(45deg, #ffecd2, #fcb69f);\'>🏆<br><small>Add photo6.jpg</small></div><h3>My Favorite</h3><p>The photo that makes me smile most</p>'">
+                <h3>My Favorite</h3>
+                <p>The photo that makes me smile most</p>
             </div>
         </section>
 
@@ -404,48 +556,49 @@
             <p>Through every laugh, every tear, every adventure and quiet moment, you've been my constant, my home, my greatest blessing.</p>
             <p>Here's to the memories we've made and the forever that lies ahead. I love you more than words could ever express.</p>
             <p style="text-align: right; margin-top: 30px;">Forever Yours,</p>
+            <p class="signature" style="text-align: right; margin-top: -10px;">Mohit</p>
         </section>
 
         <!-- Timeline -->
         <section class="timeline">
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="year">2021</div>
+                    <div class="year">2019</div>
                     <h3>The Beginning</h3>
                     <p>When two hearts became one</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="year">2022</div>
+                    <div class="year">2020</div>
                     <h3>Growing Together</h3>
                     <p>Learning, loving, and supporting each other</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="year">2023</div>
+                    <div class="year">2021</div>
                     <h3>Stronger Than Ever</h3>
                     <p>Overcoming challenges side by side</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="year">2024</div>
+                    <div class="year">2022</div>
                     <h3>New Adventures</h3>
                     <p>Creating memories around the world</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="year">2025</div>
+                    <div class="year">2023</div>
                     <h3>Deeper Love</h3>
                     <p>Falling in love with you more each day</p>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-content">
-                    <div class="year">2026</div>
+                    <div class="year">2025</div>
                     <h3>Six Years & Counting</h3>
                     <p>Forever isn't long enough with you</p>
                 </div>
@@ -455,17 +608,41 @@
         <!-- Music Section -->
         <section class="music-section">
             <h2>🎵 Our Song 🎵</h2>
-            <div class="visualizer">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+            
+            <div class="music-player">
+                <div class="album-art" id="albumArt">
+                    <img src="album-art.jpg" alt="Album Art" onerror="this.style.display='none'; this.parentElement.innerHTML='💿'" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+                
+                <div class="song-info">
+                    <h3 id="songTitle">Our</h3>
+                    <p id="artistName">Fav song</p>
+                </div>
+
+                <audio id="audioPlayer" loop>
+                    <source src="our-song.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+
+                <button class="play-btn" id="playBtn" onclick="toggleMusic()">▶️</button>
+
+                <div class="progress-bar" onclick="seek(event)">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+
+                <div class="visualizer paused" id="visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+
+                <p style="font-style: italic; opacity: 0.9; margin-top: 10px;">"Every love song is about you"</p>
             </div>
-            <p style="font-style: italic; opacity: 0.9;">"Every love song is about you"</p>
         </section>
 
         <!-- Interactive Surprise -->
@@ -480,7 +657,7 @@
         <!-- Footer -->
         <footer>
             <p>Happy 6th Anniversary, My Love</p>
-            <p class="signature">[Your Name]</p>
+            <p class="signature">Mohit & Ashu</p>
             <p style="margin-top: 20px; opacity: 0.8;">Made with 💕 just for you</p>
         </footer>
     </div>
@@ -506,6 +683,44 @@
             }, 300);
         }
 
+        // Music Player Controls
+        let isPlaying = false;
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const albumArt = document.getElementById('albumArt');
+        const visualizer = document.getElementById('visualizer');
+        const progressBar = document.getElementById('progressBar');
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                playBtn.innerHTML = '▶️';
+                albumArt.classList.add('paused');
+                visualizer.classList.add('paused');
+            } else {
+                audio.play().catch(e => {
+                    alert('Please add your song file (our-song.mp3) to the folder!');
+                });
+                playBtn.innerHTML = '⏸️';
+                albumArt.classList.remove('paused');
+                visualizer.classList.remove('paused');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Update progress bar
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+        // Click on progress bar to seek
+        function seek(e) {
+            const rect = e.target.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = pos * audio.duration;
+        }
+
         // Reveal surprise message
         function revealSurprise() {
             const surprise = document.getElementById('surprise');
@@ -513,7 +728,7 @@
             surprise.scrollIntoView({ behavior: 'smooth' });
             
             // Create explosion of hearts
-            for(let i = 0; i < 20; i++) {
+            for(let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     const heart = document.createElement('div');
                     heart.innerHTML = '💖';
@@ -527,7 +742,7 @@
                     document.body.appendChild(heart);
                     
                     setTimeout(() => {
-                        heart.style.transform = `translate(${(Math.random() - 0.5) * 500}px, ${(Math.random() - 0.5) * 500}px) scale(0)`;
+                        heart.style.transform = `translate(${(Math.random() - 0.5) * 600}px, ${(Math.random() - 0.5) * 600}px) scale(0)`;
                         heart.style.opacity = '0';
                     }, 100);
                     
